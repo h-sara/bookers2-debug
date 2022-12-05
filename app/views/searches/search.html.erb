@@ -1,2 +1,29 @@
-<h2>search for</h2>
-<p>Find me in app/views/searches/search.html.erb</p>
+<h2><%= params[:range] %> search for "<%= params[:word] %>"</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @range == "User" %>
+      <% @userss.each do |user| %>
+        <tr>
+          <td><%= image_tag user.get_profile_image, size:"50x50" %></td>
+          <td><%= user.name %></td>
+          <td><%= user.introduction %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% @bookss.each do |book| %>
+        <tr>
+          <td><%= image_tag book.user.get_profile_image, size:"50x50" %></td>
+          <td><%= book.title %></td>
+          <td><%= book.body %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

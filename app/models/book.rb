@@ -15,8 +15,8 @@ class Book < ApplicationRecord
   end
 
     # 検索をする処理（完全一致）
-  def looks(search, word)
-    @book = Book.where("name LIKE ?", "#{word}")
+  def self.looks(word)#def looks(search, word)
+    @book = Book.where("title LIKE ?", "#{word}")
   end
 
 end

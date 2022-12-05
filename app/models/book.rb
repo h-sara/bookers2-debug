@@ -14,4 +14,9 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+    # 検索をする処理（完全一致）
+  def looks(search, word)
+    @book = Book.where("name LIKE ?", "#{word}")
+  end
+
 end

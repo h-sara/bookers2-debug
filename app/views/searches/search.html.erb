@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <% if @range == "User" %>
-      <% @userss.each do |user| %>
+      <% @users.each do |user| %>
         <tr>
           <td><%= image_tag user.get_profile_image, size:"50x50" %></td>
           <td><%= user.name %></td>
@@ -17,7 +17,7 @@
         </tr>
       <% end %>
     <% else %>
-      <% @bookss.each do |book| %>
+      <% @books.each do |book| %>
         <tr>
           <td><%= image_tag book.user.get_profile_image, size:"50x50" %></td>
           <td><%= book.title %></td>

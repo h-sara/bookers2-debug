@@ -9,12 +9,21 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    # binding.pry
+    @group_user = @group.group_users.find(params[:group_id])
   end
 
-  def create
+  def create # グループを新規作成した際に実行
     @group = Group.new(group_params)
     @group.owner_id = current_user.id #owner_idカラムにcurrent_user.idを入れる
     if @group.save #saveが行われた場合
+
+      # GroupUserテーブルにデータを保存する
+      @group_user = GroupUser.new
+      @group_user.user_id = @group.owner_id
+      @group_user.group_id = @group.id
+      @group_user.save
+
       redirect_to groups_path, notice: "You have created group successfully."
     else #saveが行われなかった場合
       render users_path

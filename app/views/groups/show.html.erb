@@ -18,24 +18,28 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td><%= image_tag @group.get_group_image, size: '50x50' %></td>
-            <td>
-              <%= @group.name %>
-            </td>
-            <td><%= @group.introduction %></td>
-            <td><%= @group_user.users.name %></td>
-            <td>
-              <!--ログインユーザがグループオーナーの場合-->
-              <% if @group.owner_id == current_user.id %>
-                <%= link_to "Join this group", edit_group_path(@group), class: "btn btn-success" %>
-              <% else %>
-                <%= link_to "Leave this group", class: "btn btn-danger" %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
+          <tbody>
+            <tr>
+              <td><%= image_tag @group.get_group_image, size: '50x50' %></td>
+              <td>
+                <%= @group.name %>
+              </td>
+              <td><%= @group.introduction %></td>
+              <td>
+                <% @group_users.each do |user| %>
+                  <%= user.users.name %><br>
+                <% end %>
+              </td>
+              <td>
+                <!--ログインユーザがグループオーナーの場合-->
+                <% if @group.owner_id == current_user.id %>
+                  <%= link_to "Join this group", edit_group_path(@group), class: "btn btn-success" %>
+                <% else %>
+                  <%= link_to "Leave this group", class: "btn btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
       </table>
     </div>
   </div>

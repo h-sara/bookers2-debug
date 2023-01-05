@@ -4,13 +4,18 @@ class GroupsController < ApplicationController
   end
 
   def index
+    @book = Book.new
     @groups = Group.all
   end
 
   def show
+    @book = Book.new
     @group = Group.find(params[:id])
-    # binding.pry
-    @group_user = @group.group_users.find(params[:group_id])
+    # @group_users = Group.find(params[:user_id])
+    # @group_users = @group.group_users.select(:user_id)
+    # @group_users = @group.group_users.all
+    @group_users = GroupUser.all
+    binding.pry
   end
 
   def create # グループを新規作成した際に実行
